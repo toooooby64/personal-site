@@ -25,7 +25,7 @@
 	:global(html) {
 		scroll-behavior: smooth;
 	}
-	:global(.section#Projects::after) {
+	:global(::after) {
 		display: none !important;
 	}
 </style>

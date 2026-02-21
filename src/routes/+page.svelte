@@ -2,6 +2,7 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import AboutMe from '$lib/components/AboutMe.svelte';
 	import Projects from '$lib/components/Projects.svelte';
+	import ContactMe from '$lib/components/ContactMe.svelte';
 </script>
 
 <nav class="border fixed split-nav">
@@ -19,6 +20,7 @@
 			<ul class="inline">
 				<li><a href="#About">About</a></li>
 				<li><a href="#Projects">Projects</a></li>
+				<li><a href="#ContactMe">Contact Me</a></li>
 				<li><a href="https://www.github.com/toooooby64">Github</a></li>
 			</ul>
 		</div>
@@ -34,4 +36,8 @@
 
 <div class="paper container margin-bottom-large">
 	<Projects />
+</div>
+
+<div class="paper container margin-bottom-large">
+	<ContactMe />
 </div>
