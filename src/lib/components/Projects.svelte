@@ -9,7 +9,7 @@
 	const configInspector = {
 		title: 'Configuration Inspector',
 		description:
-			"Our ops team were constantly pulling in engineers to diagnose pricing configuration issues that didn't not need engineering involvement. I built the backend telemetry and a clear UI using React to surface that data — so ops could self-diagnose and move on without filing a ticket."
+			"Our ops team were constantly pulling in engineers to diagnose pricing configuration issues that didn't need engineering involvement. I built the backend telemetry and a clear UI using React to surface that data — so ops could self-diagnose and move on without filing a ticket."
 	};
 	const comingSoon = {
 		title: 'Many more to come! Soon™',
