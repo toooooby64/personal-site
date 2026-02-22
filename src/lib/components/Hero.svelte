@@ -14,7 +14,7 @@
 		</div>
 		<div style="display: flex; flex-direction: row; gap: 1rem; align-items: center;">
 			<label class="paper-btn btn-primary" for="blog-modal">Read my blog</label>
-			<a href="#contact" style="opacity: 0.8;">Contact me →</a>
+			<a href="#contact" style="opacity: 1;">Contact me →</a>
 		</div>
 	</div>
 

@@ -33,7 +33,7 @@
 					>
 					<a
 						href="https://www.linkedin.com/in/jalvrez/"
-						class="paper-btn btn-primary"
+						class="paper-btn btn-secondary"
 						target="_blank"
 						rel="noopener noreferrer"
 						><span style="padding: 5px;">
