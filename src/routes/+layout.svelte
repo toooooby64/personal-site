@@ -1,12 +1,57 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 	let { children } = $props();
+	let dark = $state(false);
+
+	function toggleDark() {
+		dark = !dark;
+		document.documentElement.classList.toggle('dark', dark);
+		localStorage.setItem('darkMode', String(dark));
+	}
+
+	$effect(() => {
+		const saved = localStorage.getItem('darkMode') === 'true';
+		if (saved) {
+			dark = true;
+			document.documentElement.classList.add('dark');
+		}
+	});
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 {@render children()}
+<nav class="border fixed split-nav">
+	<div class="nav-brand" style="display: flex; align-items: center; gap: 10px;">
+		<h3>JA</h3>
+		<button
+			onclick={toggleDark}
+			aria-label="Toggle dark mode"
+			class="dark-toggle"
+			style="margin: 0;"
+		>
+			{dark ? '☀️' : '🌙'}
+		</button>
+	</div>
+
+	<div class="collapsible">
+		<input id="collapsible1" type="checkbox" name="collapsible1" />
+		<label for="collapsible1">
+			<div class="bar1"></div>
+			<div class="bar2"></div>
+			<div class="bar3"></div>
+		</label>
+		<div class="collapsible-body">
+			<ul class="inline">
+				<li><a href="/#About">About</a></li>
+				<li><a href="/#Projects">Projects</a></li>
+				<li><a href="/#ContactMe">Contact Me</a></li>
+				<li><a href="https://www.github.com/toooooby64">Github</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
 
 <style>
 	:global(body) {
