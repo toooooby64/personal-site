@@ -1,7 +1,3 @@
-<script>
-	let showModal = $state(false);
-</script>
-
 <section class="row flex-center flex-middle section">
 	<div class="sm-12 md-6 lg-6 col herodiv">
 		<div>
@@ -13,7 +9,7 @@
 			</p>
 		</div>
 		<div style="display: flex; flex-direction: row; gap: 1rem; align-items: center;">
-			<label class="paper-btn btn-primary" for="blog-modal">Read my blog</label>
+			<a class="paper-btn btn-primary" href="/blog">Read my blog</a>
 			<a href="#contact" style="opacity: 1;">Contact me →</a>
 		</div>
 	</div>
@@ -22,25 +18,6 @@
 		<img src="/myself1.png" alt="Jason Alvarez" class="profile-img" />
 	</div>
 </section>
-<input class="modal-state" id="blog-modal" type="checkbox" bind:checked={showModal} />
-<div class="modal">
-	<label class="modal-bg" for="blog-modal"></label>
-	<div class="modal-body" style="width: 30%;">
-		<label class="btn-close" for="blog-modal">X</label>
-		<h4 class="modal-title">Blog is coming soon!</h4>
-		<h5 class="modal-subtitle">For now, enjoy this cool song I found</h5>
-		<div style="position: relative; padding-bottom: 56.25%; height: 0; margin-top: 1rem;">
-			<iframe
-				style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-				src={showModal ? 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1' : ''}
-				title="YouTube video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
-			></iframe>
-		</div>
-	</div>
-</div>
 
 <style>
 	.profile-img {

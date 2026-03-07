@@ -1,24 +1,84 @@
 <script>
-	import { marked } from 'marked';
 	let { data } = $props();
 </script>
 
-{#each data.posts as post}
-	<div class="card" style="width: 20rem;">
-		<img src={post.cover_image} alt="Card example image" />
+<div class="blog-page">
+	<h2>Blog</h2>
+	<div class="blog-grid">
+		{#each data.posts as post}
+			<div class="paper card">
+				{#if post.cover_image}
+					<img src={post.cover_image} alt={post.title} class="card-image" />
+				{/if}
+				<div class="card-body">
+					<h4 class="card-title">{post.title}</h4>
+					<p class="card-text">{post.excerpt}</p>
+					<a href="/blog/{post.slug}" class="paper-btn btn-primary">Read more</a>
+				</div>
+			</div>
+		{/each}
 
-		<div class="card-body">
-			<h4 class="card-title">{post.title}</h4>
-			<p class="card-text">
-				{post.excerpt}
-			</p>
-			<a href="/blog/{post.slug}"> <button>View full post</button></a>
-		</div>
+		{#if data.posts.length === 0}
+			<p>No posts yet.</p>
+		{/if}
 	</div>
-{/each}
+</div>
 
 <style>
-	.card {
-		background-color: var(--main-background);
+	.blog-page {
+		padding: 5rem 2rem 3rem;
+	}
+
+	h2 {
+		margin-bottom: 1.5rem;
+	}
+
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.blog-card {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding: 0;
+	}
+
+	.card-image {
+		width: 100%;
+		height: 180px;
+		object-fit: cover;
+	}
+
+	.card-body {
+		padding: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		gap: 0.75rem;
+	}
+
+	.card-title {
+		margin: 0;
+	}
+
+	.card-text {
+		flex: 1;
+		margin: 0;
+		opacity: 0.75;
+	}
+
+	@media (max-width: 768px) {
+		.blog-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.blog-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

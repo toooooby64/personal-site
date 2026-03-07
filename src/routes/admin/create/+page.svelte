@@ -15,6 +15,16 @@
 		extensions: [emoji(), slash(), code({ theme: 'github-dark' })]
 	});
 
+	let { form } = $props();
+
+	let showModal = $state(false);
+
+	$effect(() => {
+		if (form !== null && form !== undefined) {
+			showModal = true;
+		}
+	});
+
 	let title = $state('');
 	let excerpt = $state('');
 	let cover_image = $state('');
@@ -33,6 +43,22 @@
 
 	let slug = $derived(slugManuallyEdited ? manualSlug : toSlug(title));
 </script>
+
+<input class="modal-state" id="post-modal" type="checkbox" bind:checked={showModal} />
+<div class="modal">
+	<label class="modal-bg" for="post-modal"></label>
+	<div class="modal-body">
+		<label class="btn-close" for="post-modal">X</label>
+		{#if form?.success}
+			<h4 class="modal-title">{form.published ? '✓ Post Published!' : '✓ Draft Saved!'}</h4>
+			<p class="modal-text">{form.published ? 'Your post is now live.' : 'Your draft has been saved.'}</p>
+		{:else if form?.message}
+			<h4 class="modal-title">✗ Failed to Save</h4>
+			<p class="modal-text">{form.message}</p>
+		{/if}
+		<label class="paper-btn" for="post-modal">Close</label>
+	</div>
+</div>
 
 <div class="paper container" style="margin-top: 5rem; margin-bottom: 3rem;">
 	<h2>Create Post</h2>
@@ -136,5 +162,20 @@
 	.published-toggle input[type='checkbox'] {
 		width: 1rem;
 		height: 1rem;
+	}
+
+	:global(.modal .modal-body) {
+		padding: 2.5rem;
+		min-width: 420px;
+	}
+
+	:global(.modal .modal-title) {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	:global(.modal .modal-text) {
+		font-size: 1rem;
+		margin-bottom: 2rem;
 	}
 </style>

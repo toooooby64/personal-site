@@ -1,42 +1,48 @@
-# sv
+# Personal Portfolio & Blog
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A full-stack personal portfolio and blog platform built with SvelteKit and TypeScript.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Portfolio** — Hero, About, Projects, and Contact sections
+- **Blog** — Markdown-powered posts with syntax highlighting
+- **Admin Panel** — Protected route with Supabase authentication for creating and publishing posts
+- **Rich Markdown Editor** — carta-md with slash commands, emoji picker, and shiki syntax highlighting
+- **Dark Mode** — Persistent dark/light mode toggle
+- **SSR** — Server-side rendered with SvelteKit
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Tech Stack
 
-To recreate this project with the same configuration:
+- [SvelteKit](https://kit.svelte.dev/) — Full-stack framework (Svelte 5 runes)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Supabase](https://supabase.com/) — Authentication + PostgreSQL database
+- [carta-md](https://github.com/BearToCode/carta) — Markdown editor
+- [PaperCSS](https://www.getpapercss.com/) — UI styling
+- [Playwright](https://playwright.dev/) — End-to-end testing
+- [Vite](https://vitejs.dev/)
 
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --add prettier eslint playwright --install npm personal-site
-```
+## Getting Started
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Environment Variables
 
-To create a production version of your app:
+Create a `.env` file with your Supabase credentials:
 
-```sh
-npm run build
+```
+PUBLIC_SUPABASE_URL=your_supabase_url
+PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-You can preview the production build with `npm run preview`.
+## Scripts
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+npm run dev       # Start dev server
+npm run build     # Production build
+npm run preview   # Preview production build
+npm run check     # Type checking
+npm run test      # Run e2e tests
+```

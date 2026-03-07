@@ -1,5 +1,5 @@
 /** @satisfies {import('./$types').Actions} */
-import { redirect } from '@sveltejs/kit'
+import { redirect, fail } from '@sveltejs/kit'
 
 export const load = async (event) => {
   const { session } = await event.locals.safeGetSession()
@@ -12,7 +12,6 @@ export const load = async (event) => {
 export const actions = {
   default: async (event) => {
     const formData = await event.request.formData()
-    console.log(formData)
     const data = {
       title: formData.get('title'),
       slug: formData.get('slug'),
@@ -22,8 +21,21 @@ export const actions = {
       published: formData.get('published') === 'on'
     }
 
-    const { error } = await event.locals.supabase.from('blog-posts').insert({ published: data.published, title: data.title, slug: data.slug, excerpt: data.excerpt, content: data.content, cover_image: data.cover_image })
-    console.log(error)
+    const { error } = await event.locals.supabase
+      .from('blog-posts')
+      .insert({
+        published: data.published,
+        title: data.title,
+        slug: data.slug,
+        excerpt: data.excerpt,
+        content: data.content,
+        cover_image: data.cover_image
+      })
 
+    if (error) {
+      return fail(500, { success: false, message: error.message })
+    }
+
+    return { success: true, published: data.published }
   }
 }
