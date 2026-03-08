@@ -12,6 +12,7 @@ export const load = async (event) => {
 export const actions = {
   default: async (event) => {
     const formData = await event.request.formData()
+    const date = Date.now()
     const data = {
       title: formData.get('title'),
       slug: formData.get('slug'),
@@ -21,7 +22,23 @@ export const actions = {
       published: formData.get('published') === 'on'
     }
 
-    const { error } = await event.locals.supabase
+    const file = data.cover_image
+    const buffer = new Uint8Array(await file.arrayBuffer())
+    const filename = `${date}-${file.name}`
+
+    const { error: uploadError } = await event.locals.supabase.storage
+      .from('cover-images')
+      .upload(filename, buffer, { contentType: file.type })
+
+    if (uploadError) {
+      return fail(500, { success: false, message: `Image upload failed: ${uploadError.message}` })
+    }
+
+    const { data: { publicUrl } } = event.locals.supabase.storage
+      .from('cover-images')
+      .getPublicUrl(filename)
+
+    const { error: insertError } = await event.locals.supabase
       .from('blog-posts')
       .insert({
         published: data.published,
@@ -29,11 +46,11 @@ export const actions = {
         slug: data.slug,
         excerpt: data.excerpt,
         content: data.content,
-        cover_image: data.cover_image
+        cover_image: publicUrl
       })
 
-    if (error) {
-      return fail(500, { success: false, message: error.message })
+    if (insertError) {
+      return fail(500, { success: false, message: `Post save failed: ${insertError.message}` })
     }
 
     return { success: true, published: data.published }

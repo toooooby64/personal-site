@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DOMPurify from 'dompurify';
+	import { enhance } from '$app/forms';
 	import { Carta, MarkdownEditor } from 'carta-md';
 	import { emoji } from '@cartamd/plugin-emoji';
 	import { slash } from '@cartamd/plugin-slash';
@@ -51,7 +52,9 @@
 		<label class="btn-close" for="post-modal">X</label>
 		{#if form?.success}
 			<h4 class="modal-title">{form.published ? '✓ Post Published!' : '✓ Draft Saved!'}</h4>
-			<p class="modal-text">{form.published ? 'Your post is now live.' : 'Your draft has been saved.'}</p>
+			<p class="modal-text">
+				{form.published ? 'Your post is now live.' : 'Your draft has been saved.'}
+			</p>
 		{:else if form?.message}
 			<h4 class="modal-title">✗ Failed to Save</h4>
 			<p class="modal-text">{form.message}</p>
@@ -62,7 +65,7 @@
 
 <div class="paper container" style="margin-top: 5rem; margin-bottom: 3rem;">
 	<h2>Create Post</h2>
-	<form method="POST">
+	<form method="POST" enctype="multipart/form-data" use:enhance>
 		<div class="form-group">
 			<label for="title">Title</label>
 			<input id="title" name="title" type="text" placeholder="Post title" bind:value={title} />
@@ -95,14 +98,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="cover_image">Cover Image URL</label>
-			<input
-				id="cover_image"
-				name="cover_image"
-				type="text"
-				placeholder="https://..."
-				bind:value={cover_image}
-			/>
+			<label for="cover_image">Cover Image Upload</label>
+			<input id="cover_image" name="cover_image" type="file" accept="image/png" />
 		</div>
 
 		<div class="form-group">
