@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DOMPurify from 'isomorphic-dompurify';
+	import DOMPurify from 'dompurify';
 	import { Carta, MarkdownEditor } from 'carta-md';
 	import { emoji } from '@cartamd/plugin-emoji';
 	import { slash } from '@cartamd/plugin-slash';
