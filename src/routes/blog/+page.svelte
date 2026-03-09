@@ -3,7 +3,9 @@
 </script>
 
 <div class="blog-page">
-	<h2>Blog</h2>
+	<div style="width: 100%; display: flex; justify-content: center;">
+		<h2>Blog</h2>
+	</div>
 	<div class="blog-grid">
 		{#each data.posts as post}
 			<div class="paper card">
@@ -35,7 +37,8 @@
 
 	.blog-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(auto-fit, 768px);
+		justify-content: center;
 		gap: 1.5rem;
 	}
 
@@ -68,17 +71,5 @@
 		flex: 1;
 		margin: 0;
 		opacity: 0.75;
-	}
-
-	@media (max-width: 768px) {
-		.blog-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 480px) {
-		.blog-grid {
-			grid-template-columns: 1fr;
-		}
 	}
 </style>
